@@ -3,6 +3,7 @@ import globals from "globals";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
+  { ignores: ["generated/"] },
   {
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
