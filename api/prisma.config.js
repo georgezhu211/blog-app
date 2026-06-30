@@ -6,6 +6,7 @@ const { defineConfig } = require("prisma/config");
 module.exports = defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
+    seed: "node prisma/seed.js",
     path: "prisma/migrations",
   },
   datasource: {
