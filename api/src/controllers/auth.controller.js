@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const { generateToken } = require("../utils/token.util");
 const userRepository = require("../repositories/user.repository");
 
 exports.signup = async (req, res) => {
@@ -31,11 +31,7 @@ exports.login = async (req, res) => {
     return res.status(400).json({ error: "Incorrect password" });
   }
 
-  const token = jwt.sign(
-    { id: user.id, username: user.username, role: user.role },
-    process.env.JWT_SECRET,
-    { expiresIn: "24h" },
-  );
+  const token = generateToken(user);
 
   res.json({ token });
 };
