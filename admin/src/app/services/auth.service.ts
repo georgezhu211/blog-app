@@ -9,4 +9,8 @@ export class AuthService {
   signup(username: string, password: string): Observable<object> {
     return this.http.post('http://localhost:3000/signup', { username, password });
   }
+
+  login(username: string, password: string): Observable<object> {
+    return this.http.post('http://localhost:3000/login', { username, password });
+  }
 }
