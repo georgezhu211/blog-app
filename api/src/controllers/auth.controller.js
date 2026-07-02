@@ -13,7 +13,14 @@ exports.signup = async (req, res) => {
     role: "ADMIN",
   });
 
-  res.json(user);
+  res.json({
+    token: generateToken(user),
+    user: {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    },
+  });
 };
 
 exports.login = async (req, res) => {
@@ -22,16 +29,21 @@ exports.login = async (req, res) => {
   const user = await userRepository.findUnique({ username });
 
   if (!user) {
-    return res.status(400).json({ error: "Incorrect username" });
+    return res.status(400).json({ message: "Incorrect username" });
   }
 
   const match = await bcrypt.compare(password, user.password);
 
   if (!match) {
-    return res.status(400).json({ error: "Incorrect password" });
+    return res.status(400).json({ message: "Incorrect password" });
   }
 
-  const token = generateToken(user);
-
-  res.json({ token });
+  res.json({
+    token: generateToken(user),
+    user: {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    },
+  });
 };
