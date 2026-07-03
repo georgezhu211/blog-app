@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService, AuthResponse } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +15,7 @@ export class SignupComponent {
 
   onSubmit() {
     this.authService.signup(this.username, this.password).subscribe({
-      next: (response) => console.log('Signup successful:', response),
+      next: (response: AuthResponse) => console.log('Signup successful:', response),
       error: (error) => console.error('Signup failed:', error),
     });
   }
