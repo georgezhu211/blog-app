@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface AuthUser {
   id: number;
@@ -16,12 +17,13 @@ export interface AuthResponse {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
+  private readonly apiUrl = environment.apiUrl;
 
   signup(username: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('http://localhost:3000/signup', { username, password });
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signup`, { username, password });
   }
 
   login(username: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('http://localhost:3000/login', { username, password });
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, { username, password });
   }
 }
