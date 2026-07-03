@@ -18,6 +18,7 @@ export interface AuthResponse {
 export class AuthService {
   private http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
+  private readonly tokenKey = 'auth_token';
 
   signup(username: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signup`, { username, password });
@@ -25,5 +26,17 @@ export class AuthService {
 
   login(username: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, { username, password });
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 }
