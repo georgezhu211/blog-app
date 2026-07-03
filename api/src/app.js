@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => res.json({ message: "Access granted!" }));
 
-app.use("/", authRoutes);
+app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (error) => {
