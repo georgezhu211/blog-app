@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const { authenticateToken } = require("./middleware/auth.middleware");
 
 const authRoutes = require("./routes/auth.routes");
-const { authenticateToken } = require("./middleware/auth.middleware");
+const postRoutes = require("./routes/post.routes");
 
 const app = express();
 
@@ -12,8 +13,9 @@ app.use(express.json());
 // Public routes
 app.use("/auth", authRoutes);
 
-// Protected routes (require valid JWT)
+// Protected routes
 app.use("/api", authenticateToken);
+app.use("/api/posts", postRoutes);
 
 app.get("/api/me", (req, res) => res.json({ user: req.user }));
 
