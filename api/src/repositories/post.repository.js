@@ -10,3 +10,7 @@ exports.findByAuthor = async (authorId) => {
     orderBy: { createdAt: "desc" },
   });
 };
+
+exports.findById = async (id) => {
+  return prisma.post.findUnique({ where: { id } });
+};
