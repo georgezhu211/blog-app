@@ -9,3 +9,8 @@ exports.create = async (req, res) => {
   });
   res.status(201).json(post);
 };
+
+exports.list = async (req, res) => {
+  const posts = await postRepository.findByAuthor(req.user.id);
+  res.status(200).json(posts);
+};
