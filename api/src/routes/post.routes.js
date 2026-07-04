@@ -10,4 +10,6 @@ router.get("/:id", controller.get);
 
 router.post("/", controller.create);
 
+router.patch("/:id", controller.update);
+
 module.exports = router;

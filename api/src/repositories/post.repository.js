@@ -14,3 +14,7 @@ exports.findByAuthor = async (authorId) => {
 exports.findById = async (id) => {
   return prisma.post.findUnique({ where: { id } });
 };
+
+exports.update = async (id, data) => {
+  return prisma.post.update({ where: { id }, data });
+};

@@ -19,3 +19,12 @@ exports.get = async (req, res) => {
   const post = await postRepository.findById(Number(req.params.id));
   res.status(200).json(post);
 };
+
+exports.update = async (req, res) => {
+  const { title, content } = req.body;
+  const post = await postRepository.update(Number(req.params.id), {
+    title,
+    content,
+  });
+  res.status(200).json(post);
+};
