@@ -18,3 +18,7 @@ exports.findById = async (id) => {
 exports.update = async (id, data) => {
   return prisma.post.update({ where: { id }, data });
 };
+
+exports.remove = async (id) => {
+  return prisma.post.delete({ where: { id } });
+};

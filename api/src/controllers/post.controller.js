@@ -28,3 +28,8 @@ exports.update = async (req, res) => {
   });
   res.status(200).json(post);
 };
+
+exports.remove = async (req, res) => {
+  await postRepository.remove(Number(req.params.id));
+  res.status(200).json({ message: "Post deleted" });
+};
