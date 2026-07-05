@@ -16,13 +16,13 @@ exports.list = async (req, res) => {
 };
 
 exports.get = async (req, res) => {
-  const post = await postRepository.findById(Number(req.params.id));
+  const post = await postRepository.findById(req.params.id);
   res.status(200).json(post);
 };
 
 exports.update = async (req, res) => {
   const { title, content } = req.body;
-  const post = await postRepository.update(Number(req.params.id), {
+  const post = await postRepository.update(req.params.id, {
     title,
     content,
   });
@@ -30,6 +30,6 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  await postRepository.remove(Number(req.params.id));
+  await postRepository.remove(req.params.id);
   res.status(200).json({ message: "Post deleted" });
 };
