@@ -21,6 +21,9 @@ exports.get = async (req, res) => {
   if (!post) {
     return res.status(404).json({ message: "Post not found" });
   }
+  if (post.authorId !== req.user.id) {
+    return res.status(403).json({ message: "Forbidden" });
+  }
 
   res.status(200).json(post);
 };
@@ -29,6 +32,9 @@ exports.update = async (req, res) => {
   const existing = await postRepository.findById(req.params.id);
   if (!existing) {
     return res.status(404).json({ message: "Post not found" });
+  }
+  if (existing.authorId !== req.user.id) {
+    return res.status(403).json({ message: "Forbidden" });
   }
 
   const { title, content } = req.body;
@@ -43,6 +49,9 @@ exports.remove = async (req, res) => {
   const existing = await postRepository.findById(req.params.id);
   if (!existing) {
     return res.status(404).json({ message: "Post not found" });
+  }
+  if (existing.authorId !== req.user.id) {
+    return res.status(403).json({ message: "Forbidden" });
   }
 
   await postRepository.remove(req.params.id);
