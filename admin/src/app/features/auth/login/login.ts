@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, AuthResponse } from '../services/auth.service';
+import { AuthService, AuthResponse } from '../../../core/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-login',
   imports: [FormsModule],
-  templateUrl: './signup.html',
+  templateUrl: './login.html',
 })
-export class SignupComponent {
+export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -16,12 +16,12 @@ export class SignupComponent {
   password = '';
 
   onSubmit() {
-    this.authService.signup(this.username, this.password).subscribe({
+    this.authService.login(this.username, this.password).subscribe({
       next: (response: AuthResponse) => {
         this.authService.setToken(response.token);
         this.router.navigate(['/dashboard']);
       },
-      error: (error) => console.error('Signup failed:', error),
+      error: (error) => console.error('Login failed:', error),
     });
   }
 }
