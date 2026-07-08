@@ -9,15 +9,15 @@ export const routes: Routes = [
   },
   {
     path: 'signup',
-    loadComponent: () => import('./features/auth/signup/signup').then((m) => m.SignupComponent),
+    loadComponent: () => import('./features/auth/signup/signup').then((m) => m.Signup),
   },
   {
     path: 'login',
-    loadComponent: () => import('./features/auth/login/login').then((m) => m.LoginComponent),
+    loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
   },
   {
     path: 'dashboard',
-    loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.DashboardComponent),
+    loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),
     canActivate: [authGuard],
   },
 ];

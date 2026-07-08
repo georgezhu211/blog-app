@@ -8,7 +8,7 @@ import { AuthService, AuthResponse } from '../../../core/services/auth.service';
   imports: [FormsModule],
   templateUrl: './signup.html',
 })
-export class SignupComponent {
+export class Signup {
   private authService = inject(AuthService);
   private router = inject(Router);
 
