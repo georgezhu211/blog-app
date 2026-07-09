@@ -1,1 +1,12 @@
-<p>post-detail works!</p>
+@if (post.hasValue()) {
+  @let p = post.value();
+
+  <article>
+    <h2>{{ p.title }}</h2>
+    <p>{{ p.content }}</p>
+  </article>
+} @else if (post.error()) {
+  <div>Could not load post</div>
+} @else if (post.isLoading()) {
+  <div>Loading post...</div>
+}
