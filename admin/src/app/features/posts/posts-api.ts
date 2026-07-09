@@ -1,6 +1,6 @@
 import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 
 export interface Post {
   id: number;
@@ -14,11 +14,11 @@ export class PostsApi {
   private url = `${environment.apiUrl}/api/posts`;
 
   getAll() {
-    return this.http.get<Post[]>(this.url);
+    return httpResource<Post[]>(() => this.url);
   }
 
-  getById(id: number) {
-    return this.http.get<Post>(`${this.url}/${id}`);
+  getById(id: () => number) {
+    return httpResource<Post>(() => `${this.url}/${id()}`);
   }
 
   create(post: Omit<Post, 'id'>) {
