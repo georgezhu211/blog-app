@@ -1,1 +1,14 @@
-<p>post-list works!</p>
+<h1>Posts</h1>
+
+@if (posts.hasValue()) {
+  @for (post of posts.value(); track post.id) {
+    <article>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+    </article>
+  }
+} @else if (posts.error()) {
+  <div>Could not load posts</div>
+} @else if (posts.isLoading()) {
+  <div>Loading posts...</div>
+}
