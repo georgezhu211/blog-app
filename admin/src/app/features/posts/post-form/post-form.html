@@ -1,1 +1,9 @@
-<p>post-form works!</p>
+<form (submit)="onSubmit($event)">
+  <label for="title">Title:</label>
+  <input id="title" type="text" [formField]="postForm.title" />
+
+  <label for="content">Content:</label>
+  <textarea id="content" [formField]="postForm.content"></textarea>
+
+  <button type="submit">Save Post</button>
+</form>

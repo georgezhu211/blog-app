@@ -1,4 +1,5 @@
 <h1>Posts</h1>
+<a routerLink="new">Create Post</a>
 
 @if (posts.hasValue()) {
   @for (post of posts.value(); track post.id) {
