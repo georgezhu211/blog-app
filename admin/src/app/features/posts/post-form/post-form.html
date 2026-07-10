@@ -1,9 +1,27 @@
 <form (submit)="onSubmit($event)">
-  <label for="title">Title:</label>
-  <input id="title" type="text" [formField]="postForm.title" />
+  @if (error()) {
+    <p role="alert">{{ error() }}</p>
+  }
 
-  <label for="content">Content:</label>
-  <textarea id="content" [formField]="postForm.content"></textarea>
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" type="text" [formField]="postForm.title" />
+    @if (postForm.title().touched() && postForm.title().invalid()) {
+      @for (error of postForm.title().errors(); track error) {
+        <p>{{ error.message }}</p>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="content">Content:</label>
+    <textarea id="content" [formField]="postForm.content"></textarea>
+    @if (postForm.content().touched() && postForm.content().invalid()) {
+      @for (error of postForm.content().errors(); track error) {
+        <p>{{ error.message }}</p>
+      }
+    }
+  </div>
 
   <button type="submit">Save Post</button>
 </form>
