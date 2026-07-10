@@ -23,5 +23,11 @@
     }
   </div>
 
-  <button type="submit">Save Post</button>
+  <button type="submit" [disabled]="submitting()">
+    @if (submitting()) {
+      Saving...
+    } @else {
+      Save Post
+    }
+  </button>
 </form>

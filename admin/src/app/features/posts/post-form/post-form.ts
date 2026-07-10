@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Post, PostsApi } from '../posts-api';
 import { form, FormField, required, maxLength } from '@angular/forms/signals';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-post-form',
@@ -26,18 +27,24 @@ export class PostForm {
   });
 
   error = signal('');
+  submitting = signal(false);
 
   onSubmit(event: Event) {
     event.preventDefault();
     this.error.set('');
 
-    if (this.postForm().invalid()) {
+    if (this.submitting() || this.postForm().invalid()) {
       return;
     }
 
-    this.postsApi.create(this.postModel()).subscribe({
-      next: () => this.router.navigate(['/posts']),
-      error: () => this.error.set('Failed to save post. Please try again.'),
-    });
+    this.submitting.set(true);
+
+    this.postsApi
+      .create(this.postModel())
+      .pipe(finalize(() => this.submitting.set(false)))
+      .subscribe({
+        next: () => this.router.navigate(['/posts']),
+        error: () => this.error.set('Failed to save post. Please try again.'),
+      });
   }
 }
