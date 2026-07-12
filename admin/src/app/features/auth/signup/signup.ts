@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService, AuthResponse } from '../../../core/services/auth.service';
 import { form, FormField, required, minLength, maxLength, pattern } from '@angular/forms/signals';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './signup.html',
 })
 export class Signup {
