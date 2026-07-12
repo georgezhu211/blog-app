@@ -1,1 +1,11 @@
-<router-outlet />
+@if (isAuthenticated) {
+  <header class="app-header">
+    <nav>
+      <span class="app-title">Blog Admin</span>
+    </nav>
+    <button type="button" (click)="logout()">Log out</button>
+  </header>
+}
+<main>
+  <router-outlet />
+</main>

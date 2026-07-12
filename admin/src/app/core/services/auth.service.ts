@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -17,6 +18,7 @@ export interface AuthResponse {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
+  private router = inject(Router);
   private readonly apiUrl = environment.apiUrl;
   private readonly tokenKey = 'auth_token';
 
@@ -38,5 +40,10 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    this.router.navigateByUrl('/login');
   }
 }
